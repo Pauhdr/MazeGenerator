@@ -10,7 +10,8 @@ let completed=false;
 let m=0;
 
 function setup(){
- createCanvas(400, 400);
+ var canvas = createCanvas(400, 400);
+ canvas.parent("mainContainer");
 //  translate(width/2, height/2)
  cols=floor((width-w)/w);
  rows=floor((height-w)/w);
