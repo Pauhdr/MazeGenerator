@@ -1,5 +1,5 @@
 let cells=[];
-let w=40;
+let w=10;
 let cols, rows;
 let current;
 let stack=[];
@@ -8,9 +8,21 @@ let path=[];
 let finalWay=[];
 let completed=false;
 let m=0;
+let solution;
 
 function setup(){
- createCanvas(400, 400);
+    path = [];
+    finalWay = [];
+    stack = [];
+    cells = [];
+    completed = false;
+    m = 0;
+    let diff = select("#difficulty").value() * 10;
+    w = 400/diff;
+    solution = select("#solution").checked();
+    let cnv = createCanvas(400, 400);
+    cnv.parent("#main");
+
 //  translate(width/2, height/2)
  cols=floor((width-w)/w);
  rows=floor((height-w)/w);
@@ -59,7 +71,7 @@ function draw(){
     }else if(stack.length>0){
         current = stack.pop();
     }
-    if(stack.length==0&&finalWay.length>0&&m<finalWay.length){
+    if(stack.length==0&&finalWay.length>0&&m<finalWay.length&&solution){
         finalWay[m].pathWay=true;
         m++;
         // if(completed){
@@ -70,6 +82,17 @@ function draw(){
         
         
     }
+    if((stack.length==0&&finalWay.length>0&&m==finalWay.length&&solution) || (stack.length==0&&finalWay.length>0&&!solution)){
+        completed=true;
+        let dwnld = select("#download");
+        dwnld.removeAttribute("disabled");
+    }
+}
+
+
+function hideSolution(){
+    finalWay.forEach(cell => {cell.pathWay=false; cell.show();});
+    // saveCanvas("maze", "png");
 }
 
 function index(i, j){
