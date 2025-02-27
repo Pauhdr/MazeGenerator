@@ -90,9 +90,9 @@ function draw(){
 }
 
 
-function hideSolution(){
-    finalWay.forEach(cell => {cell.pathWay=false; cell.show();});
-    // saveCanvas("maze", "png");
+function download(){
+    //finalWay.forEach(cell => {cell.pathWay=false; cell.show();});
+    saveCanvas("maze", "png");
 }
 
 function index(i, j){
